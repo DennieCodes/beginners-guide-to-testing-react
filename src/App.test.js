@@ -6,6 +6,21 @@ import App from "./App";
 import userEvent from "@testing-library/user-event";
 
 describe("Header", () => {
+  test('"The logo" link points to the home page', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    const link = screen.getByRole("link", { name: /logo.svg/i });
+    userEvent.click(link);
+
+    expect(
+      screen.getByRole("heading", { name: /Find the top posts on Reddit/i })
+    ).toBeInTheDocument();
+  });
+
   test('"How it works" link points to the correct page', () => {
     render(
       <MemoryRouter>
