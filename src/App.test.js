@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { screen } from "@testing-library/react";
 import App from "./App";
+import userEvent from "@testing-library/user-event";
 
 describe("Header", () => {
   test('"How it works" link points to the correct page', () => {
@@ -11,6 +12,13 @@ describe("Header", () => {
         <App />
       </MemoryRouter>
     );
-    screen.debug();
+
+    const link = screen.getByRole("link", { name: /how it works/i });
+    userEvent.click(link);
+
+    expect(
+      screen.getByRole("heading", { name: /how it works/i })
+    ).toBeInTheDocument();
+    // screen.debug();
   });
 });
