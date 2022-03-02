@@ -21,4 +21,17 @@ describe("Header", () => {
     ).toBeInTheDocument();
     // screen.debug();
   });
+
+  test('"About" link points to the correct page', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    const link = screen.getByRole("link", { name: /About/i });
+    userEvent.click(link);
+
+    expect(screen.getByRole("heading", { name: /About/i })).toBeInTheDocument();
+  });
 });
